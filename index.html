@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rekomendasi Menu Kantin</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #fff0f5;
+    color: #713b55;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 650px;
+    margin: auto;
+}
+
+header {
+    background: linear-gradient(135deg, #f5a6c5, #dc6799);
+    color: white;
+    text-align: center;
+    padding: 35px 15px;
+    border-radius: 20px;
+}
+
+header h1 {
+    font-size: 28px;
+}
+
+.card {
+    background: white;
+    padding: 22px;
+    margin-top: 20px;
+    border-radius: 18px;
+    box-shadow: 0 4px 12px #e8a8c455;
+}
+
+h2 {
+    color: #d45d91;
+}
+
+.anggota p {
+    background: #fff0f5;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.menu {
+    display: flex;
+    justify-content: space-between;
+    background: #fff0f5;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 10px;
+}
+
+.menu strong {
+    color: #d45d91;
+}
+
+input {
+    width: 100%;
+    padding: 13px;
+    border: 2px solid #edb2cd;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+button {
+    width: 100%;
+    padding: 13px;
+    margin-top: 12px;
+    background: #e879a8;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #c94f83;
+}
+
+#hasil {
+    background: #fff0f5;
+    padding: 15px;
+    margin-top: 15px;
+    border-radius: 10px;
+    line-height: 1.8;
+}
+
+footer {
+    text-align: center;
+    padding: 25px;
+    color: #d45d91;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<header>
+    <h1>♡ MENU KANTIN ♡</h1>
+    <p>Rekomendasi Menu Sesuai Budget Kamu</p>
+</header>
+
+<div class="card anggota">
+    <h2>Disusun Oleh</h2>
+    <p>1. Rifka Azqa</p>
+    <p>2. Kayla Syifa</p>
+    <p>3. Nurhkafifah</p>
+    <p>4. Adelia Oktaviana</p>
+    <p>5. Arini Februani</p>
+</div>
+
+<div class="card">
+    <h2>♡ Daftar Menu Kantin</h2>
+
+    <div class="menu">
+        <span>🍛 Nasi Goreng</span>
+        <strong>Rp12.000</strong>
+    </div>
+
+    <div class="menu">
+        <span>🍌 Pisang Goreng</span>
+        <strong>Rp5.000</strong>
+    </div>
+
+    <div class="menu">
+        <span>🧋 Es Teh Manis</span>
+        <strong>Rp3.000</strong>
+    </div>
+</div>
+
+<div class="card">
+    <h2>♡ Masukkan Budget Kamu</h2>
+
+    <input
+        type="number"
+        id="budget"
+        placeholder="Masukkan jumlah uang"
+        min="1"
+    >
+
+    <button onclick="cariMenu()">
+        Cari Rekomendasi
+    </button>
+
+    <div id="hasil">
+        Rekomendasi menu akan muncul di sini.
+    </div>
+</div>
+
+<footer>
+    <p>♡ Terima Kasih ♡</p>
+    <p>Kelompok Rekomendasi Menu Kantin</p>
+</footer>
+
+</div>
+
+<script>
+
+const menu = [
+    {nama: "Nasi Goreng", harga: 12000},
+    {nama: "Pisang Goreng", harga: 5000},
+    {nama: "Es Teh Manis", harga: 3000}
+];
+
+function cariMenu() {
+
+    let budget = Number(
+        document.getElementById("budget").value
+    );
+
+    let hasil = document.getElementById("hasil");
+
+    if (budget <= 0 || !Number.isFinite(budget)) {
+        hasil.innerHTML =
+        "Masukkan budget yang benar!";
+        return;
+    }
+
+    let rekomendasi = menu.filter(
+        item => item.harga <= budget
+    );
+
+    if (rekomendasi.length > 0) {
+
+        let output = "<h3>♡ Menu yang Bisa Kamu Beli ♡</h3>";
+
+        rekomendasi.forEach(item => {
+            output += `
+                <p>✓ ${item.nama} - 
+                Rp${item.harga.toLocaleString("id-ID")}</p>
+            `;
+        });
+
+        hasil.innerHTML = output;
+
+    } else {
+
+        hasil.innerHTML =
+        "Maaf, budget kamu belum cukup untuk membeli menu kantin.";
+
+    }
+}
+
+</script>
+
+</body>
+</html>
